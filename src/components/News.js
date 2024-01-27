@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import NewsItem from "./NewItem";
+import Spinner from "./Spinner";
 
 export default class News extends Component {
   constructor() {
@@ -13,12 +14,14 @@ export default class News extends Component {
 
   async componentDidMount() {
     let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=42f88537dabc4894b27251c31befdc3e&page=1&pageSize=${this.props.pageSize}`;
+    this.setState({ loading: true });
     let data = await fetch(url);
     let parsedData = await data.json();
     console.log(parsedData);
     this.setState({
       articles: parsedData.articles,
       totalResults: parsedData.totalResults,
+      loading: false,
     });
   }
 
@@ -26,26 +29,34 @@ export default class News extends Component {
     let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=42f88537dabc4894b27251c31befdc3e&page=${
       this.state.page - 1
     }&pageSize=${this.props.pageSize}`;
+    this.setState({ loading: true });
     let data = await fetch(url);
     let parsedData = await data.json();
-    this.setState({ articles: parsedData.articles, page: this.state.page - 1 });
+    this.setState({
+      articles: parsedData.articles,
+      page: this.state.page - 1,
+      loading: false,
+    });
   };
 
   handalNextClick = async () => {
     console.log("next");
     if (
-      this.state.page + 1 >
-      Math.ceil(this.state.totalResults / this.props.pageSize)
+      !(
+        this.state.page + 1 >
+        Math.ceil(this.state.totalResults / this.props.pageSize)
+      )
     ) {
-    } else {
       let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=42f88537dabc4894b27251c31befdc3e&page=${
         this.state.page + 1
       }&pageSize=${this.props.pageSize}`;
+      this.setState({ loading: true });
       let data = await fetch(url);
       let parsedData = await data.json();
       this.setState({
         articles: parsedData.articles,
         page: this.state.page + 1,
+        loading: false,
       });
     }
   };
@@ -55,19 +66,24 @@ export default class News extends Component {
       <>
         <div className="container my-3 ">
           <h1 className="text-center">NewMonkey - Top Headlines</h1>
+          <div className="text-center">{this.state.loading && <Spinner />}</div>
+
           <div className="row my-4">
-            {this.state.articles.map((element) => {
-              return (
-                <div className="col-md-4" key={element.url}>
-                  <NewsItem
-                    title={element.title ? element.title : ""}
-                    description={element.description ? element.description : ""}
-                    imageUrl={element.urlToImage}
-                    newsUrl={element.url}
-                  />
-                </div>
-              );
-            })}
+            {!this.state.loading &&
+              this.state.articles.map((element) => {
+                return (
+                  <div className="col-md-4" key={element.url}>
+                    <NewsItem
+                      title={element.title ? element.title : ""}
+                      description={
+                        element.description ? element.description : ""
+                      }
+                      imageUrl={element.urlToImage}
+                      newsUrl={element.url}
+                    />
+                  </div>
+                );
+              })}
           </div>
         </div>
         <div className="container d-flex justify-content-between">
