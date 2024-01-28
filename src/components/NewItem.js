@@ -21,7 +21,7 @@ export default class NewItem extends Component {
             <p className="card-text">
               <small className="text-muted">
                 By {author ? author : "Unknown"} on{" "}
-                {new Date(date).toGMTstring()}
+                {new Date(date).toLocaleDateString()}
               </small>
             </p>
             <a

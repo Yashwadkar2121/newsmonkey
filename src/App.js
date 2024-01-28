@@ -5,14 +5,13 @@ import News from "./components/News.js";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 export class App extends Component {
-  pageSize = 15;
+  pageSize = 6;
   render() {
     return (
       <BrowserRouter>
         <Navbar />
         <Routes>
           <Route
-            exact
             path="/"
             element={
               <News
@@ -24,7 +23,6 @@ export class App extends Component {
             }
           />
           <Route
-            exact
             path="/business"
             element={
               <News
@@ -36,19 +34,28 @@ export class App extends Component {
             }
           />
           <Route
-            exact
-            path="/enterainment"
+            path="/entertainment"
             element={
               <News
-                key="enterainment"
+                key="entertainment"
                 pageSize={this.pageSize}
                 country="in"
-                category="enterainment"
+                category="entertainment"
               />
             }
           />
           <Route
-            exact
+            path="/general"
+            element={
+              <News
+                key="general"
+                pageSize={this.pageSize}
+                country="in"
+                category="general"
+              />
+            }
+          />
+          <Route
             path="/health"
             element={
               <News
@@ -60,7 +67,6 @@ export class App extends Component {
             }
           />
           <Route
-            exact
             path="/science"
             element={
               <News
@@ -72,7 +78,6 @@ export class App extends Component {
             }
           />
           <Route
-            exact
             path="/sports"
             element={
               <News
@@ -84,7 +89,6 @@ export class App extends Component {
             }
           />
           <Route
-            exact
             path="/technology"
             element={
               <News
