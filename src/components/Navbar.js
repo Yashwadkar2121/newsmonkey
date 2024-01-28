@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 
 export class Navbar extends Component {
   render() {
@@ -74,6 +74,7 @@ export class Navbar extends Component {
             </div>
           </div>
         </nav>
+        <Outlet />
       </div>
     );
   }

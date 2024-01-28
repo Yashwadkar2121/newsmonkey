@@ -20,7 +20,7 @@ export default class NewItem extends Component {
             <p className="card-text">{description}</p>
             <p className="card-text">
               <small className="text-muted">
-                By {!author ? "Unknown" : author} on{" "}
+                By {author ? author : "Unknown"} on{" "}
                 {new Date(date).toGMTstring()}
               </small>
             </p>
