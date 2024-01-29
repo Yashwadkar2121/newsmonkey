@@ -16,17 +16,21 @@ export default class News extends Component {
     category: PropTypes.string,
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       articles: [],
       loading: false,
       page: 1,
     };
+    document.title = `${this.capitalize(this.props.category)} - NewsMonkey`;
   }
 
+  capitalize = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
   async updateNews() {
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=42f88537dabc4894b27251c31befdc3e&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+    const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=42f88537dabc4894b27251c31befdc3e&page=${this.state.page}&pageSize=${this.props.pageSize}`;
     this.setState({ loading: true });
     let data = await fetch(url);
     let parsedData = await data.json();
@@ -55,7 +59,9 @@ export default class News extends Component {
     return (
       <>
         <div className="container my-3 ">
-          <h1 className="text-center">NewMonkey - Top Headlines</h1>
+          <h1 className="text-center">
+            NewMonkey - Top {this.capitalize(this.props.category)} Headlines
+          </h1>
           <div className="text-center">{this.state.loading && <Spinner />}</div>
 
           <div className="row my-4">

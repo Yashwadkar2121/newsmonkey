@@ -15,10 +15,10 @@ export class App extends Component {
             path="/"
             element={
               <News
-                key="general"
+                key="home"
                 pageSize={this.pageSize}
                 country="in"
-                category="general"
+                category=""
               />
             }
           />
@@ -41,17 +41,6 @@ export class App extends Component {
                 pageSize={this.pageSize}
                 country="in"
                 category="entertainment"
-              />
-            }
-          />
-          <Route
-            path="/general"
-            element={
-              <News
-                key="general"
-                pageSize={this.pageSize}
-                country="in"
-                category="general"
               />
             }
           />
