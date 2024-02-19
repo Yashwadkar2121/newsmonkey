@@ -5,7 +5,7 @@ export class Navbar extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top">
           <div className="container-fluid">
             <Link className="navbar-brand" to="/">
               NewMonkey

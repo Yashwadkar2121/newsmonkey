@@ -14,10 +14,13 @@ export default class NewItem extends Component {
             }
             className="card-img-top"
             alt="..."
+            width="100%"
+            height="200px"
+          
           />
           <div className="card-body">
-            <h5 className="card-title">{title}</h5>
-            <p className="card-text">{description}</p>
+            <h5 className="card-title">{title}....</h5>
+            <p className="card-text">{description}....</p>
             <p className="card-text">
               <small className="text-muted">
                 By {author ? author : "Unknown"} on{" "}
