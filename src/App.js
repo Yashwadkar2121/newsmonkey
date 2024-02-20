@@ -5,7 +5,7 @@ import News from "./components/News.js";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const App = () => {
-  const pageSize = 5;
+  const pageSize = 6;
   return (
     <BrowserRouter>
       <Navbar />
